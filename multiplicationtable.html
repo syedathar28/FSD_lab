@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multiplication Table</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        .box {
+            width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        input {
+            padding: 10px;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px 25px;
+            margin-top: 15px;
+        }
+
+        #result {
+            font-size: 18px;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h1>Multiplication Table</h1>
+
+        <input type="number" id="number" step="1"
+               placeholder="Enter a whole number">
+
+        <br>
+
+        <button onclick="showTable()">
+            Show Table
+        </button>
+
+        <p id="result"></p>
+
+    </div>
+
+    <script>
+
+        function showTable() {
+
+            let input = document.getElementById("number").value;
+            let number = Number(input);
+            let result = document.getElementById("result");
+
+            switch (true) {
+                case input.trim() === "":
+                case !Number.isSafeInteger(number):
+                    result.textContent = "Please enter a whole number.";
+                    return;
+            }
+
+            let table = [];
+
+            for (let multiplier = 1; multiplier <= 10; multiplier++) {
+                table.push(number + " x " + multiplier + " = " +
+                    number * multiplier);
+            }
+
+            result.textContent = table.join("\n");
+        }
+
+    </script>
+
+</body>
+</html>

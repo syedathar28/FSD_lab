@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prime Number Checker</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        .box {
+            width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        input {
+            padding: 10px;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px 25px;
+            margin-top: 15px;
+        }
+
+        #result {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h1>Prime Number Checker</h1>
+
+        <input type="number" id="number" step="1"
+               placeholder="Enter a whole number">
+
+        <br>
+
+        <button onclick="checkPrime()">
+            Check Number
+        </button>
+
+        <p id="result"></p>
+
+    </div>
+
+    <script>
+
+        function checkPrime() {
+
+            let input = document.getElementById("number").value;
+            let number = Number(input);
+            let result;
+            let isPrime = number >= 2;
+
+            switch (true) {
+                case input.trim() === "":
+                case !Number.isSafeInteger(number):
+                    result = "Please enter a whole number.";
+                    break;
+                default:
+                    for (let divisor = 2;
+                         isPrime && divisor * divisor <= number;
+                         divisor++) {
+                        switch (number % divisor) {
+                            case 0:
+                                isPrime = false;
+                                break;
+                        }
+                    }
+
+                    switch (isPrime) {
+                        case true:
+                            result = number + " is a prime number.";
+                            break;
+                        default:
+                            result = number + " is not a prime number.";
+                    }
+            }
+
+            document.getElementById("result").innerHTML = result;
+        }
+
+    </script>
+
+</body>
+</html>

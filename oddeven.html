@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Odd or Even</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        .box {
+            width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        input {
+            padding: 10px;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px 25px;
+            margin-top: 15px;
+        }
+
+        #result {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h1>Odd or Even</h1>
+
+        <input type="number" id="number" step="1"
+               placeholder="Enter a whole number">
+
+        <br>
+
+        <button onclick="checkNumber()">
+            Check Number
+        </button>
+
+        <p id="result"></p>
+
+    </div>
+
+    <script>
+
+        function checkNumber() {
+
+            let input = document.getElementById("number").value;
+            let number = Number(input);
+            let result;
+
+            switch (true) {
+                case input.trim() === "":
+                case !Number.isInteger(number):
+                    result = "Please enter a whole number.";
+                    break;
+                case number % 2 === 0:
+                    result = number + " is even.";
+                    break;
+                default:
+                    result = number + " is odd.";
+            }
+
+            document.getElementById("result").innerHTML = result;
+        }
+
+    </script>
+
+</body>
+</html>

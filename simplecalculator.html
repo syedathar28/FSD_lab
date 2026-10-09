@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        .box {
+            width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        input,
+        select {
+            padding: 10px;
+            width: 220px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px 25px;
+            margin-top: 15px;
+        }
+
+        #result {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h1>Simple Calculator</h1>
+
+        <input type="number" id="firstNumber" step="any"
+               placeholder="Enter first number">
+
+        <br>
+
+        <select id="operation">
+            <option value="add">Addition (+)</option>
+            <option value="subtract">Subtraction (-)</option>
+            <option value="multiply">Multiplication (*)</option>
+            <option value="divide">Division (/)</option>
+            <option value="modulo">Modulus (%)</option>
+        </select>
+
+        <br>
+
+        <input type="number" id="secondNumber" step="any"
+               placeholder="Enter second number">
+
+        <br>
+
+        <button onclick="calculate()">
+            Calculate
+        </button>
+
+        <p id="result"></p>
+
+    </div>
+
+    <script>
+
+        function calculate() {
+
+            let firstInput = document.getElementById("firstNumber").value;
+            let secondInput = document.getElementById("secondNumber").value;
+            let operation = document.getElementById("operation").value;
+            let firstNumber = Number(firstInput);
+            let secondNumber = Number(secondInput);
+            let answer;
+            let symbol;
+            let result = document.getElementById("result");
+
+            switch (true) {
+                case firstInput.trim() === "" || secondInput.trim() === "":
+                    result.textContent = "Please enter both numbers.";
+                    return;
+                 case (operation === "divide" || operation === "modulo") &&
+                     secondNumber === 0:
+                    result.textContent = "Cannot divide by zero.";
+                    return;
+            }
+
+            switch (operation) {
+                case "add":
+                    answer = firstNumber + secondNumber;
+                    symbol = "+";
+                    break;
+                case "subtract":
+                    answer = firstNumber - secondNumber;
+                    symbol = "-";
+                    break;
+                case "multiply":
+                    answer = firstNumber * secondNumber;
+                    symbol = "*";
+                    break;
+                case "divide":
+                    answer = firstNumber / secondNumber;
+                    symbol = "/";
+                    break;
+                case "modulo":
+                    answer = firstNumber % secondNumber;
+                    symbol = "%";
+                    break;
+                default:
+                    result.textContent = "Please select a valid operation.";
+                    return;
+            }
+
+            result.textContent = firstNumber + " " + symbol + " " +
+                secondNumber + " = " + answer;
+        }
+
+    </script>
+
+</body>
+</html>

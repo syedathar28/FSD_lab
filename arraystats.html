@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Array Statistics</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        .box {
+            width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        input {
+            padding: 10px;
+            width: 280px;
+            max-width: 90%;
+        }
+
+        button {
+            padding: 10px 25px;
+            margin-top: 15px;
+        }
+
+        #result {
+            font-size: 18px;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h1>Array Statistics</h1>
+
+        <input type="text" id="numbers"
+               placeholder="Enter numbers separated by commas">
+
+        <br>
+
+        <button onclick="calculateStatistics()">
+            Calculate
+        </button>
+
+        <p id="result"></p>
+
+    </div>
+
+    <script>
+
+        function calculateStatistics() {
+
+            let input = document.getElementById("numbers").value;
+            let result = document.getElementById("result");
+            let entries = input.split(",");
+
+            switch (true) {
+                case input.trim() === "":
+                case entries.some(entry =>
+                    entry.trim() === "" || !Number.isFinite(Number(entry))):
+                    result.textContent =
+                        "Please enter numbers separated by commas.";
+                    return;
+            }
+
+            let numbers = entries.map(entry => Number(entry));
+            let largest = numbers[0];
+            let smallest = numbers[0];
+            let sum = 0;
+
+            for (let number of numbers) {
+                sum += number;
+
+                switch (true) {
+                    case number > largest:
+                        largest = number;
+                        break;
+                }
+
+                switch (true) {
+                    case number < smallest:
+                        smallest = number;
+                        break;
+                }
+            }
+
+            let average = sum / numbers.length;
+
+            result.textContent =
+                "Largest: " + largest + "\n" +
+                "Smallest: " + smallest + "\n" +
+                "Sum: " + sum + "\n" +
+                "Average: " + average;
+        }
+
+    </script>
+
+</body>
+</html>
